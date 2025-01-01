@@ -20,6 +20,7 @@ On Windows: Download FFmpeg and add it to your PATH.
 Python dependencies:
 
 bash 
+
 pip install pdfplumber google-cloud-texttospeech
 
 
@@ -30,7 +31,9 @@ Google Cloud Authentication:
 Set up your Google Cloud project and create a service account key.
 
 Download the JSON credentials file and set the environment variable:
+
 bash
+
 export GOOGLE_APPLICATION_CREDENTIALS="path_to_your_service_account_key.json"
 
 Place Your PDF:
@@ -40,9 +43,11 @@ Place the PDF file you want to convert in the same directory as this script, or 
 Usage
 
 1. Run the Script
+   
 Execute the Python script with the path to your PDF file:
 
 bash
+
 python pdf_to_audiobook.py
 
 2. Input/Output Details
@@ -63,21 +68,27 @@ Generate MP3 files for each chunk of the PDF.
 Combine the MP3 files into a single file: sample/sample.mp3.
 
 Example Command:
+
 bash
+
 python pdf_to_audiobook.py
 
 
 Script Overview
 
 Text Extraction: The script uses the pdfplumber library to extract the text from the provided PDF.
+
 Text-to-Speech: The script utilizes Google Cloud's Text-to-Speech API to convert the extracted text into audio.
+
 Audio Chunking: The text is split into chunks of 5000 bytes (to stay within the API limits), and each chunk is converted to an MP3 file.
+
 FFmpeg: The script then uses FFmpeg to merge the individual MP3 files into one final audiobook.
 
 
 Troubleshooting
 
 1. Invalid Argument Error (Text Length):
+
 If you encounter an error related to text length exceeding the 5000-byte limit, the script ensures chunks stay within this limit by checking the byte size of each chunk.
 
 2. FFmpeg Not Found:
