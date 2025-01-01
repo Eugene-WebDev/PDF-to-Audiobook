@@ -1,4 +1,3 @@
-# PDF-to-Audiobook
 PDF to Audiobook Converter
 This script converts a PDF file into an audiobook using Google Text-to-Speech (TTS) and combines the audio files into a single MP3 file. It extracts text from the PDF, splits it into chunks, generates audio for each chunk, and then merges them into one final audiobook.
 
