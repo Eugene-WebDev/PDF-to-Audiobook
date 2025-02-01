@@ -1,9 +1,9 @@
-PDF to Audiobook Converter
+# PDF to Audiobook Converter
 
 This script converts a PDF file into an audiobook using Google Text-to-Speech (TTS) and combines the audio files into a single MP3 file. 
 It extracts text from the PDF, splits it into chunks, generates audio for each chunk, and then merges them into one final audiobook.
 
-Prerequisites
+**Prerequisites**
 Python 3.8+
 
 Google Cloud Account with the Text-to-Speech API enabled:
@@ -17,12 +17,9 @@ On Ubuntu/Debian: sudo apt install ffmpeg
 On macOS (via Homebrew): brew install ffmpeg
 On Windows: Download FFmpeg and add it to your PATH.
 
-Python dependencies:
-
-bash 
+**Python dependencies:** 
 
 pip install pdfplumber google-cloud-texttospeech
-
 
 Setup
 
@@ -32,21 +29,17 @@ Set up your Google Cloud project and create a service account key.
 
 Download the JSON credentials file and set the environment variable:
 
-bash
-
 export GOOGLE_APPLICATION_CREDENTIALS="path_to_your_service_account_key.json"
 
 Place Your PDF:
 
 Place the PDF file you want to convert in the same directory as this script, or provide its full path.
 
-Usage
+**Usage**
 
 1. Run the Script
    
 Execute the Python script with the path to your PDF file:
-
-bash
 
 python pdf_to_audiobook.py
 
@@ -69,12 +62,10 @@ Combine the MP3 files into a single file: sample/sample.mp3.
 
 Example Command:
 
-bash
-
 python pdf_to_audiobook.py
 
 
-Script Overview
+**Script Overview**
 
 Text Extraction: The script uses the pdfplumber library to extract the text from the provided PDF.
 
@@ -85,16 +76,3 @@ Audio Chunking: The text is split into chunks of 5000 bytes (to stay within the 
 FFmpeg: The script then uses FFmpeg to merge the individual MP3 files into one final audiobook.
 
 
-Troubleshooting
-
-1. Invalid Argument Error (Text Length):
-
-If you encounter an error related to text length exceeding the 5000-byte limit, the script ensures chunks stay within this limit by checking the byte size of each chunk.
-
-2. FFmpeg Not Found:
-
-Ensure FFmpeg is correctly installed and accessible from the command line (ffmpeg -version).
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
