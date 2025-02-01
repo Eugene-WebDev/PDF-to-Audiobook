@@ -4,15 +4,14 @@ This script converts a PDF file into an audiobook using Google Text-to-Speech (T
 It extracts text from the PDF, splits it into chunks, generates audio for each chunk, and then merges them into one final audiobook.
 
 **Prerequisites**
+
 Python 3.8+
 
 Google Cloud Account with the Text-to-Speech API enabled:
-
 Set up Google Cloud
 Enable the Text-to-Speech API
 
 FFmpeg installed:
-
 On Ubuntu/Debian: sudo apt install ffmpeg
 On macOS (via Homebrew): brew install ffmpeg
 On Windows: Download FFmpeg and add it to your PATH.
