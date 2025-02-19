@@ -1,77 +1,109 @@
 # PDF to Audiobook Converter
 
-This script converts a PDF file into an audiobook using Google Text-to-Speech (TTS) and combines the audio files into a single MP3 file. 
-It extracts text from the PDF, splits it into chunks, generates audio for each chunk, and then merges them into one final audiobook.
+This Python script converts a PDF document into an audiobook (MP3 format). It extracts text from a PDF using [pdfplumber](https://github.com/jsvine/pdfplumber), converts the text into speech with the 
+[Google Cloud Text-to-Speech API](https://cloud.google.com/text-to-speech), and finally merges the resulting audio chunks into a single MP3 file using [FFmpeg](https://ffmpeg.org/).
 
-**Prerequisites**
+## Features
 
-Python 3.8+
+- **PDF Text Extraction:** Uses pdfplumber to extract text from each page of the PDF.
+- **Chunking:** Splits large texts into byte-safe chunks for efficient processing.
+- **Text-to-Speech:** Converts each text chunk to speech using Google Cloud’s Text-to-Speech.       
+- **Audio Merging:** Combines multiple MP3 audio chunks into one final audiobook file via FFmpeg.   
 
-Google Cloud Account with the Text-to-Speech API enabled:
-Set up Google Cloud
-Enable the Text-to-Speech API
+## Requirements
 
-FFmpeg installed:
-On Ubuntu/Debian: sudo apt install ffmpeg
-On macOS (via Homebrew): brew install ffmpeg
-On Windows: Download FFmpeg and add it to your PATH.
+- **Python 3.x**
+- **Python Packages:**
+  - [pdfplumber](https://pypi.org/project/pdfplumber/)
+  - [google-cloud-texttospeech](https://pypi.org/project/google-cloud-texttospeech/)
+- **FFmpeg:** Must be installed and added to your system PATH.
+- **Google Cloud Account:** Text-to-Speech API must be enabled.
+- **Google Cloud Credentials:** Set the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to your service account JSON key file.
 
-**Python dependencies:** 
+## Installation
 
-pip install pdfplumber google-cloud-texttospeech
+1. **Clone the Repository:**
 
-Setup
+   ```bash
+   git clone https://github.com/yourusername/yourrepository.git
+   cd yourrepository
+   ```
 
-Google Cloud Authentication:
+2. **Install Python Dependencies:**
 
-Set up your Google Cloud project and create a service account key.
+   You can install the required packages using pip:
 
-Download the JSON credentials file and set the environment variable:
+   ```bash
+   pip install pdfplumber google-cloud-texttospeech
+   ```
 
-export GOOGLE_APPLICATION_CREDENTIALS="path_to_your_service_account_key.json"
+   Alternatively, if you have a `requirements.txt` file, run:
 
-Place Your PDF:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Place the PDF file you want to convert in the same directory as this script, or provide its full path.
+3. **Install FFmpeg:**
 
-**Usage**
+   - **Windows:** Download FFmpeg from the [official website](https://ffmpeg.org/download.html) and 
+add it to your PATH.
+   - **macOS:** Install via Homebrew:
+     ```bash
+     brew install ffmpeg
+     ```
+   - **Linux:** Install using your package manager, e.g.:
+     ```bash
+     sudo apt-get install ffmpeg
+     ```
 
-1. Run the Script
-   
-Execute the Python script with the path to your PDF file:
+4. **Set Up Google Cloud Credentials:**
 
-python pdf_to_audiobook.py
+   Follow the [Google Cloud Text-to-Speech Quickstart](https://cloud.google.com/text-to-speech/docs/quickstart-client-libraries) to download your service account key. Then, set the environment variable:
 
-2. Input/Output Details
+   ```bash
+   export GOOGLE_APPLICATION_CREDENTIALS="/path/to/your/credentials.json"
+   ```
 
-Input: A PDF file (path_to_your_pdf.pdf).
+## Usage
 
-Output:
-A folder named after the PDF file will be created (e.g., for your_pdf.pdf, a folder your_pdf/ will be created).
-MP3 files will be saved in that folder, with each chunk of the text being converted to an individual MP3 file (chunk_0.mp3, chunk_1.mp3, etc.).
-The final audiobook will be combined and saved as <pdf_name>.mp3.
+1. **Prepare Your PDF:**
+   - Place the PDF you want to convert in the repository directory.
+   - Update the `pdf_path` variable in `pdf_to_mp3.py` to point to your PDF file (e.g., replace `"Black Hat Python.pdf"` with your file name).
 
-Example
+2. **Run the Script:**
 
-If you have a PDF named sample.pdf, running the script will:
+   ```bash
+   python pdf_to_mp3.py
+   ```
 
-Create a folder named sample/.
-Generate MP3 files for each chunk of the PDF.
-Combine the MP3 files into a single file: sample/sample.mp3.
+3. **Process Overview:**
+   - The script extracts text from the PDF.
+   - It splits the text into manageable chunks.
+   - Each chunk is converted to an MP3 file.
+   - All MP3 chunks are merged into a single audiobook file.
+   - The final MP3 is saved in a folder named after the PDF (without its extension).
 
-Example Command:
+## Troubleshooting
 
-python pdf_to_audiobook.py
+- **Google Cloud Credentials Error:** Verify that the `GOOGLE_APPLICATION_CREDENTIALS` environment variable is set correctly and points to your JSON key file.
+- **FFmpeg Not Found:** Ensure that FFmpeg is installed and its executable is in your system PATH.  
+- **PDF Extraction Issues:** Some PDFs may have non-standard formatting that can affect text extraction. Consider preprocessing your PDF if you encounter issues.
 
+## Contributing
 
-**Script Overview**
+Contributions are welcome! If you have suggestions, bug fixes, or improvements, please open an issue or submit a pull request.
 
-Text Extraction: The script uses the pdfplumber library to extract the text from the provided PDF.
+## License
 
-Text-to-Speech: The script utilizes Google Cloud's Text-to-Speech API to convert the extracted text into audio.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.        
 
-Audio Chunking: The text is split into chunks of 5000 bytes (to stay within the API limits), and each chunk is converted to an MP3 file.
+## Acknowledgements
 
-FFmpeg: The script then uses FFmpeg to merge the individual MP3 files into one final audiobook.
+- [pdfplumber](https://github.com/jsvine/pdfplumber) for enabling efficient PDF text extraction.    
+- [Google Cloud Text-to-Speech](https://cloud.google.com/text-to-speech) for the speech synthesis capabilities.
+- [FFmpeg](https://ffmpeg.org/) for robust audio processing and merging.
+```
+
+This README outlines the purpose, features, setup, and usage instructions of your script. Adjust any sections as needed for your specific project details or personal preferences.
 
 
